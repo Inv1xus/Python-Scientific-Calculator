@@ -7,7 +7,11 @@ import math
 root = Tk()
 root.geometry("850x400+300+300")  # Adjusted width to accommodate columns
 root.title("Scientific Calculator")
+
 switch = None
+history = []
+
+
 
 # --- Functions ---
 # Favorites Button Functions
@@ -22,9 +26,47 @@ def favorite3_clicked():
 
 # History Button Function
 def history_clicked():
-    tkinter.messagebox.showinfo("History", "This is your calculation history!")
 
-# Trigonometric and Advanced Functions
+    history_window = Toplevel(root)
+    history_window.title("History")
+    history_window.geometry("400x400")  # Initial size
+
+    # Function to insert clicked history item into the display
+    def insert_to_display(item):
+        disp.delete(0, END)
+        disp.insert(0, item)
+
+    # Add history items as buttons
+    for i, (expression, result, function_type) in enumerate(history):
+        function_btn = Button(history_window, text=f"{function_type}",
+                              command=lambda exp=expression: insert_to_display(exp))
+        expression_btn = Button(history_window, text=f"{expression}",
+                                command=lambda exp=expression: insert_to_display(exp))
+        result_btn = Button(history_window, text=str(result),
+                            command=lambda res=result: insert_to_display(res))
+        blank = Button(history_window, text="=", fg="white", bg="#333333", activebackground="#bf3956")
+
+        # Pack or grid the buttons
+        function_btn.grid(row=i, column=0, sticky="nsew")
+        expression_btn.grid(row=i, column=1, sticky="nsew")
+        blank.grid(row=i, column=2, sticky="nsew")
+        result_btn.grid(row=i, column=3, sticky="nsew")
+
+        # Configure columns to expand dynamically
+        history_window.grid_columnconfigure(0, weight=1)
+        history_window.grid_columnconfigure(1, weight=1)
+        history_window.grid_columnconfigure(2, weight=1)
+        history_window.grid_columnconfigure(3, weight=1)
+
+    # Add a button to close the window
+    close_btn = Button(history_window, text="Close", command=history_window.destroy, fg="white", bg="red",
+                       activebackground="#bf3956")
+    close_btn.grid(row=len(history), pady=10, column=0, columnspan=4,rowspan=1, sticky="nsew")
+
+    # Ensure window resizes based on the largest widget
+    history_window.update_idletasks()  # Force an update to apply the changes
+
+
 def btn1_clicked():
     if disp.get() == '0':
         disp.delete(0, END)
@@ -93,69 +135,81 @@ def btnd_clicked():
 def btnc_clicked(*args):
     disp.delete(0, END)
     disp.insert(0, '0')
+def comma_clicked():
+    pos = len(disp.get())
+    disp.insert(pos, ',')
+
+# Trigonometric and Advanced Functions
 def sin_clicked():
     try:
         ans = float(disp.get())
+        exp = disp.get()
+
         if switch is True:
             ans = math.sin(math.radians(ans))
         else:
             ans = math.sin(ans)
-            disp.delete(0, END)
-            disp.insert(0, str(ans))
+        disp.delete(0, END)
+        disp.insert(0, str(ans))
+        history.append((exp, ans, "sin"))
     except Exception:
         tkinter.messagebox.showerror("Value Error", "Check your values and operators")
 def cos_clicked():
     try:
         ans = float(disp.get())
+        exp = disp.get()
+
         if switch is True:
             ans = math.cos(math.radians(ans))
         else:
             ans = math.cos(ans)
-            disp.delete(0, END)
-            disp.insert(0, str(ans))
+        disp.delete(0, END)
+        disp.insert(0, str(ans))
+        history.append((exp, ans, "cos"))
     except Exception:
         tkinter.messagebox.showerror("Value Error", "Check your values and operators")
+
 def tan_clicked():
     try:
         ans = float(disp.get())
+        exp = disp.get()
+
         if switch is True:
             ans = math.tan(math.radians(ans))
         else:
             ans = math.tan(ans)
-            disp.delete(0, END)
-            disp.insert(0, str(ans))
+        disp.delete(0, END)
+        disp.insert(0, str(ans))
+        history.append((exp, ans, "tan"))
     except Exception:
         tkinter.messagebox.showerror("Value Error", "Check your values and operators")
 def arcsin_clicked():
-    def arcsin_clicked():
-        try:
-            ans = float(disp.get())
-            if -1 <= ans <= 1:  # Validate input range for arcsin
-                if switch is True:
-                    ans = math.degrees(math.asin(ans))
-                else:
-                    ans = math.asin(ans)
-                disp.delete(0, END)
-                disp.insert(0, str(ans))
-            else:
-                tkinter.messagebox.showerror("Value Error", "Input must be between -1 and 1 for arcsin")
-        except Exception:
-            tkinter.messagebox.showerror("Value Error", "Check your values and operators")
+    try:
+        num = float(disp.get())
+        if switch:  # If in degrees
+            result = math.degrees(math.asin(num))
+        else:
+            result = math.asin(num)
+        disp.delete(0, END)
+        disp.insert(0, str(result))
+        history.append((f"arcsin({num})", result, "arcsin"))
+    except Exception:
+        tkinter.messagebox.showerror("Value Error", "Input must be between -1 and 1.")
 def arccos_clicked():
-    def arccos_clicked():
-        try:
-            ans = float(disp.get())
-            if -1 <= ans <= 1:  # Ensure the input is within the domain of acos
-                if switch is True:  # Convert to degrees if in degrees mode
-                    ans = math.degrees(math.acos(ans))
-                else:
-                    ans = math.acos(ans)
-                disp.delete(0, END)
-                disp.insert(0, str(ans))
+
+    try:
+        ans = float(disp.get())
+        if -1 <= ans <= 1:  # Ensure the input is within the domain of acos
+            if switch is True:  # Convert to degrees if in degrees mode
+                ans = math.degrees(math.acos(ans))
             else:
-                raise ValueError("Input out of domain. Arccos accepts values between -1 and 1.")
-        except Exception as e:
-            tkinter.messagebox.showerror("Value Error", f"Check your values and operators. {e}")
+                ans = math.acos(ans)
+            disp.delete(0, END)
+            disp.insert(0, str(ans))
+        else:
+            raise ValueError("Input out of domain. Arccos accepts values between -1 and 1.")
+    except Exception as e:
+        tkinter.messagebox.showerror("Value Error", f"Check your values and operators. {e}")
 def arctan_clicked():
     try:
         ans = float(disp.get())
@@ -181,19 +235,25 @@ def round_clicked():
 def logarithm_clicked():
     try:
         ans = float(disp.get())
+        exp = disp.get()
+
         ans = math.log10(ans)
         disp.delete(0, END)
         disp.insert(0, str(ans))
+        history.append((exp, ans, "log"))
     except Exception:
         tkinter.messagebox.showerror("Value Error", "Check your values and operators")
 def fact_clicked():
     try:
-        ans = float(disp.get())
-        ans = math.factorial(ans)
+        num = int(disp.get())
+        if num < 0:
+            raise ValueError("Factorial is not defined for negative numbers.")
+        result = math.factorial(num)
         disp.delete(0, END)
-        disp.insert(0, str(ans))
+        disp.insert(0, str(result))
+        history.append((f"{num}!", result, "factorial"))
     except Exception:
-        tkinter.messagebox.showerror("Value Error", "Check your values and operators")
+        tkinter.messagebox.showerror("Value Error", "Input must be a non-negative integer.")
 def sqr_clicked():
     try:
         ans = float(disp.get())
@@ -247,34 +307,72 @@ def conv_clicked():
 
 def ln_clicked():
     try:
-        ans = float(disp.get())
-        ans = math.log(ans)
+        num = float(disp.get())
+        result = math.log(num)
         disp.delete(0, END)
-        disp.insert(0, str(ans))
+        disp.insert(0, str(result))
+        history.append((f"ln({num})", result, "ln"))
     except Exception:
-        tkinter.messagebox.showerror("Value Error", "Check your values and operators")
+        tkinter.messagebox.showerror("Value Error", "Check your input.")
 def mod_clicked():
     pos = len(disp.get())
     disp.insert(pos, '%')
 def btneq_clicked():
     try:
-        ans = disp.get()
-        ans= ans.replace("^", "**")
-        ans = eval(ans)
+        # Map supported functions to the math module
+        allowed_functions = {
+            'sin': math.sin,
+            'cos': math.cos,
+            'tan': math.tan,
+            'arcsin': math.asin,
+            'arccos': math.acos,
+            'arctan': math.atan,
+            'sinh': math.sinh,
+            'cosh': math.cosh,
+            'tanh': math.tanh,
+            'gamma': math.gamma,
+            'log': math.log10,
+            'ln': math.log,
+            'sqrt': math.sqrt,
+            'pi': math.pi,
+            'e': math.e,
+            '!':math.factorial,
+            'pi': math.pi,
+
+        }
+
+        # Get the expression from the display
+        exp = disp.get()
+
+        # Replace caret (^) with exponentiation operator (**)
+        exp = exp.replace('^', '**')
+
+        # Evaluate the expression with only allowed functions
+        res = eval(exp, {"__builtins__": None}, allowed_functions)
+
+        # Display the result
         disp.delete(0, END)
-        disp.insert(0, ans)
-    except:
-        tkinter.messagebox.showerror("Value Error", "Check your values and operators")
+        disp.insert(0, res)
+
+        # Save to history
+        history.append((exp.replace("**", "^"), res, "function"))
+    except Exception as e:
+        tkinter.messagebox.showerror("Value Error", f"Error evaluating expression: {e}")
+
+
 
 
 def std_clicked():
     try:
-        data = list(map(float, disp.get().split(',')))
-        result = standard_deviation(data)
+        values = list(map(float, disp.get().split(',')))
+        mean = sum(values) / len(values)
+        variance = sum((x - mean) ** 2 for x in values) / len(values)
+        std_dev = math.sqrt(variance)
         disp.delete(0, END)
-        disp.insert(0, result)
+        disp.insert(0, str(std_dev))
+        history.append(("STDDEV",std_dev, values ))
     except Exception:
-        tkinter.messagebox.showerror("Value Error", "Invalid input for Standard Deviation. Provide a comma-separated list.")
+        tkinter.messagebox.showerror("Value Error", "Input must be comma-separated numbers.")
 
 def standard_deviation(data):
     mean = sum(data) / len(data)
@@ -284,14 +382,16 @@ def standard_deviation(data):
 
     return std_dev
 
+
 def sinh_clicked():
     try:
-        ans = float(disp.get())
-        ans = sinh(ans)
+        num = float(disp.get())
+        result = math.sinh(num)
         disp.delete(0, END)
-        disp.insert(0, ans)
-    except:
-        tkinter.messagebox.showerror("Value Error", "Check your values and operators")
+        disp.insert(0, str(result))
+        history.append((f"sinh({num})", result, "sinh"))
+    except Exception:
+        tkinter.messagebox.showerror("Value Error", "Check your input.")
 
 def sinh(x):
 
@@ -304,14 +404,17 @@ def sinh(x):
     return result
 
 
+
 def mad_clicked():
     try:
-        data = list(map(float, disp.get().split(',')))
-        result = mean_absolute_deviation(data)
+        values = list(map(float, disp.get().split(',')))
+        mean = sum(values) / len(values)
+        mad = sum(abs(x - mean) for x in values) / len(values)
         disp.delete(0, END)
-        disp.insert(0, result)
+        disp.insert(0, str(mad))
+        history.append(("MAD",mad, values))
     except Exception:
-        tkinter.messagebox.showerror("Value Error", "Invalid input for MAD. Provide a comma-separated list.")
+        tkinter.messagebox.showerror("Value Error", "Input must be comma-separated numbers.")
 
 def mean_absolute_deviation(data):
     mean = sum(data) / len(data)
@@ -320,16 +423,19 @@ def mean_absolute_deviation(data):
 
 def gamma_clicked():
     try:
-        ans = float(disp.get())
-        result = math.gamma(ans)
+        num = float(disp.get())
+        result = math.gamma(num)
         disp.delete(0, END)
-        disp.insert(0, result)
+        disp.insert(0, str(result))
+        history.append((f"gamma({num})", result, "gamma"))
     except Exception:
-        tkinter.messagebox.showerror("Value Error", "Invalid input for gamma(x)")
+        tkinter.messagebox.showerror("Value Error", "Check your input.")
 
 # Display Entry
-disp = Entry(root, font="Verdana 20", fg="black", bg="mistyrose", bd=4, justify=RIGHT, background="#333333", foreground="white")
-disp.grid(row=0, column=0, columnspan=14, sticky="nsew")  # Entry spans across all columns
+canvas = Canvas(root, width=400, height=400,bg="#1e2e47")
+canvas.grid(row=0, column=0, columnspan=14,rowspan=13, sticky="nsew")
+disp = Entry(root, font="Verdana 20", fg="black", bg="mistyrose", bd=4, justify=RIGHT, background="#d9e2eb", foreground="black")
+disp.grid(row=0, column=0, columnspan=14,pady=10,padx=50, sticky="nsew")  # Entry spans across all columns
 
 
 # Configure grid for resizing
@@ -435,6 +541,8 @@ btn0.grid(row=4, column=5, sticky="nsew")
 
 dot_btn = Button(root, text=" • ", font="Segoe 21", relief=GROOVE, bd=0, command=dot_clicked, fg="white", bg="#333333", activebackground="#bf3956")
 dot_btn.grid(row=5, column=5, sticky="nsew")
+comma_btn = Button(root, text=" , ", font="Segoe 21", relief=GROOVE, bd=0, command=comma_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+comma_btn.grid(row=6, column=5, sticky="nsew")
 
 # Column 7
 btn3 = Button(root, text="3", font="Segoe 23", relief=GROOVE, bd=0, command=btn3_clicked, fg="white", bg="#333333", activebackground="#bf3956")
@@ -452,20 +560,21 @@ round_btn = Button(root, text="round", font="Segoe 10 bold", relief=GROOVE, bd=0
 round_btn.grid(row=5, column=6, sticky="nsew")
 
 # Remaining Buttons in Other Columns
-btnp = Button(root, text="+", font="Segoe 23", relief=GROOVE, bd=0, command=btnp_clicked, fg="white", bg="#333333", activebackground="#bf3956")
-btnp.grid(row=1, column=8, sticky="nsew")
-
-btnm = Button(root, text="-", font="Segoe 23", relief=GROOVE, bd=0, command=btnm_clicked, fg="white", bg="#333333", activebackground="#bf3956")
-btnm.grid(row=2, column=8, sticky="nsew")
-
-btnml = Button(root, text="*", font="Segoe 23", relief=GROOVE, bd=0, command=btnml_clicked, fg="white", bg="#333333", activebackground="#bf3956")
-btnml.grid(row=3, column=8, sticky="nsew")
-
-btnd = Button(root, text="/", font="Segoe 23", relief=GROOVE, bd=0, command=btnd_clicked, fg="white", bg="#333333", activebackground="#bf3956")
-btnd.grid(row=4, column=8, sticky="nsew")
-
 conv_btn = Button(root, text="Rad", font="Segoe 12 bold", relief=GROOVE, bd=0, command=conv_clicked, fg="white", bg="#FF69B4", activebackground="#bf3956")
 conv_btn.grid(row=1, column=8, sticky="nsew")
+
+btnp = Button(root, text="+", font="Segoe 23", relief=GROOVE, bd=0, command=btnp_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btnp.grid(row=2, column=8, sticky="nsew")
+
+btnm = Button(root, text="-", font="Segoe 23", relief=GROOVE, bd=0, command=btnm_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btnm.grid(row=3, column=8, sticky="nsew")
+
+btnml = Button(root, text="*", font="Segoe 23", relief=GROOVE, bd=0, command=btnml_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btnml.grid(row=4, column=8, sticky="nsew")
+
+btnd = Button(root, text="/", font="Segoe 23", relief=GROOVE, bd=0, command=btnd_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btnd.grid(row=5, column=8, sticky="nsew")
+
 
 
 
@@ -475,7 +584,7 @@ mod_btn.grid(row=5, column=8, sticky="nsew")
 
 
 #bottom row
-fav_btn1 = Button(root, text="✩", font="Segoe 23", relief=GROOVE, bd=0, command=favorite1_clicked, fg="white", bg="#FFA07A", activebackground="#bf3956")
+fav_btn1 = Button(root, text="✩", font="Segoe 23", relief=FLAT, bd=0, command=favorite1_clicked, fg="white", bg="#1e2e47", activebackground="#bf3956")
 fav_btn1.grid(row=8, column=3, sticky="nsew")
 history_btn = Button(root, text="History", font="Segoe 18", relief=GROOVE, bd=0, command=history_clicked, fg="white", bg="#20B2AA", activebackground="#bf3956")
 history_btn.grid(row=8, column=7, sticky="nsew")
