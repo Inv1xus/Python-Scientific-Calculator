@@ -4,10 +4,10 @@ import tkinter.messagebox
 from tkmacosx import Button
 import math
 
+
 root = Tk()
 root.geometry("850x400+300+300")  # Adjusted width to accommodate columns
 root.title("Scientific Calculator")
-
 switch = None
 history = []
 
@@ -44,7 +44,7 @@ def history_clicked():
                                 command=lambda exp=expression: insert_to_display(exp))
         result_btn = Button(history_window, text=str(result),
                             command=lambda res=result: insert_to_display(res))
-        blank = Button(history_window, text="=", fg="white", bg="#333333", activebackground="#bf3956")
+        blank = Button(history_window, text="=", fg="white", bg="#0d1c2f", activebackground="#bf3956")
 
         # Pack or grid the buttons
         function_btn.grid(row=i, column=0, sticky="nsew")
@@ -448,145 +448,145 @@ for j in range(9):  # Columns
 # --- Buttons ---
 
 # Column 1
-pow_btn = Button(root, text="x^y", font="Segoe 17", relief=GROOVE, bd=0, command=pow_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+pow_btn = Button(root, text="x^y", font="Calibri 17", relief=GROOVE, bd=0, command=pow_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 pow_btn.grid(row=1, column=0, sticky="nsew")
 
-sqr_btn = Button(root, text="√x", font="Segoe 17", relief=GROOVE, bd=0, command=sqr_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+sqr_btn = Button(root, text="√x", font="Calibri 17", relief=GROOVE, bd=0, command=sqr_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 sqr_btn.grid(row=2, column=0, sticky="nsew")
 
-sin_btn = Button(root, text="sin", font="Segoe 17", relief=GROOVE, bd=0, command=sin_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+sin_btn = Button(root, text="sin", font="Calibri 17", relief=GROOVE, bd=0, command=sin_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 sin_btn.grid(row=3, column=0, sticky="nsew")
 
-arcsin_btn = Button(root, text="arcsin", font="Segoe 12", relief=GROOVE, bd=0, command=arcsin_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+arcsin_btn = Button(root, text="arcsin",font= "Calibri 15" , relief=GROOVE, bd=0, command=arcsin_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 arcsin_btn.grid(row=4, column=0, sticky="nsew")
 
-bl_btn = Button(root, text="(", font="Segoe 21", relief=GROOVE, bd=0, command=bl_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+bl_btn = Button(root, text="(", font="Calibri 21", relief=GROOVE, bd=0, command=bl_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 bl_btn.grid(row=5, column=0, sticky="nsew")
-fact_btn = Button(root, text=" x! ", font="Segoe 18", relief=GROOVE, bd=0, command=fact_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+fact_btn = Button(root, text=" x! ", font="Calibri 18", relief=GROOVE, bd=0, command=fact_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 fact_btn.grid(row=6, column=0, sticky="nsew")
 
 
 
 
 # Column 2
-std_btn = Button(root, text="σ", font="Segoe 17", relief=GROOVE, bd=0, command=std_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+std_btn = Button(root, text="σ", font="Calibri 17", relief=GROOVE, bd=0, command=std_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 std_btn.grid(row=1, column=1, sticky="nsew")
 
-logarithm_btn = Button(root, text="log", font="Segoe 17", relief=GROOVE, bd=0, command=logarithm_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+logarithm_btn = Button(root, text="log", font="Calibri 17", relief=GROOVE, bd=0, command=logarithm_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 logarithm_btn.grid(row=2, column=1, sticky="nsew")
 
-cos_btn = Button(root, text="cos", font="Segoe 17", relief=GROOVE, bd=0, command=cos_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+cos_btn = Button(root, text="cos", font="Calibri 17", relief=GROOVE, bd=0, command=cos_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 cos_btn.grid(row=3, column=1, sticky="nsew")
 
-arccos_btn = Button(root, text="arccos", font="Segoe 12", relief=GROOVE, bd=0, command=arccos_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+arccos_btn = Button(root, text="arccos", font="Calibri 12", relief=GROOVE, bd=0, command=arccos_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 arccos_btn.grid(row=4, column=1, sticky="nsew")
 
-br_btn = Button(root, text=")", font="Segoe 21", relief=GROOVE, bd=0, command=br_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+br_btn = Button(root, text=")", font="Calibri 21", relief=GROOVE, bd=0, command=br_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 br_btn.grid(row=5, column=1, sticky="nsew")
 
-e_btn = Button(root, text="e", font="Segoe 18", relief=GROOVE, bd=0, command=e_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+e_btn = Button(root, text="e", font="Calibri 18", relief=GROOVE, bd=0, command=e_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 e_btn.grid(row=5, column=2, sticky="nsew")
 
-ln_btn = Button(root, text="ln", font="Segoe 18", relief=GROOVE, bd=0, command=ln_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+ln_btn = Button(root, text="ln", font="Calibri 18", relief=GROOVE, bd=0, command=ln_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 ln_btn.grid(row=6, column=2, sticky="nsew")
 
-sinh_btn = Button(root, text="sinh", font="Segoe 17", relief=GROOVE, bd=0, command=sinh_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+sinh_btn = Button(root, text="sinh", font="Calibri 17", relief=GROOVE, bd=0, command=sinh_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 sinh_btn.grid(row=6, column=1, sticky="nsew")
-gamma_btn = Button(root, text=" gamma ", font="Segoe 18", relief=GROOVE, bd=0, command=gamma_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+gamma_btn = Button(root, text=" gamma ", font="Calibri 18", relief=GROOVE, bd=0, command=gamma_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 gamma_btn.grid(row=7, column=0, sticky="nsew")
 
 # Column 3
-mad_btn = Button(root, text="MAD", font="Segoe 17", relief=GROOVE, bd=0, command=mad_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+mad_btn = Button(root, text="MAD", font="Calibri 17", relief=GROOVE, bd=0, command=mad_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 mad_btn.grid(row=1, column=2, sticky="nsew")
 
-pi_btn = Button(root, text="π", font="Segoe 17", relief=GROOVE, bd=0, command=pi_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+pi_btn = Button(root, text="π", font="Calibri 17", relief=GROOVE, bd=0, command=pi_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 pi_btn.grid(row=2, column=2, sticky="nsew")
 
-tan_btn = Button(root, text="tan", font="Segoe 17", relief=GROOVE, bd=0, command=tan_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+tan_btn = Button(root, text="tan", font="Calibri 17", relief=GROOVE, bd=0, command=tan_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 tan_btn.grid(row=3, column=2, sticky="nsew")
 
-arctan_btn = Button(root, text="arctan", font="Segoe 12", relief=GROOVE, bd=0, command=arctan_clicked, fg="white", bg="#3985bf", activebackground="#bf3956")
+arctan_btn = Button(root, text="arctan", font="Calibri 12", relief=GROOVE, bd=0, command=arctan_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 arctan_btn.grid(row=4, column=2, sticky="nsew")
 
 # Column 4 (Blank)
 
 # Shifted Columns 3, 4, 5 -> 5, 6, 7
 # Column 5
-btn1 = Button(root, text="1", font="Segoe 23", relief=GROOVE, bd=0, command=btn1_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btn1 = Button(root, text="1", font="Calibri 23", relief=GROOVE, bd=0, command=btn1_clicked, fg="white", bg="#0d1c2f", activebackground="#bf3956")
 btn1.grid(row=1, column=4, sticky="nsew")
 
-btn4 = Button(root, text="4", font="Segoe 23", relief=GROOVE, bd=0, command=btn4_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btn4 = Button(root, text="4", font="Calibri 23", relief=GROOVE, bd=0, command=btn4_clicked, fg="white", bg="#0d1c2f", activebackground="#bf3956")
 btn4.grid(row=2, column=4, sticky="nsew")
 
-btn7 = Button(root, text="7", font="Segoe 23", relief=GROOVE, bd=0, command=btn7_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btn7 = Button(root, text="7", font="Calibri 23", relief=GROOVE, bd=0, command=btn7_clicked, fg="white", bg="#0d1c2f", activebackground="#bf3956")
 btn7.grid(row=3, column=4, sticky="nsew")
 
-btnc = Button(root, text="C", font="Segoe 23", relief=GROOVE, bd=0, command=btnc_clicked, fg="white", bg="#a3ed34", activebackground="#bf3956")
+btnc = Button(root, text="C", font="Calibri 23", relief=GROOVE, bd=0, command=btnc_clicked, fg="white", bg="#ee4932", activebackground="#bf3956")
 btnc.grid(row=4, column=4, sticky="nsew")
-del_btn = Button(root, text="⌫", font="Segoe 20", relief=GROOVE, bd=0, command=del_clicked, fg="white", bg="#a3ed34", activebackground="#bf3956")
+del_btn = Button(root, text="⌫", font="Calibri 20", relief=GROOVE, bd=0, command=del_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 del_btn.grid(row=5, column=4, sticky="nsew")
 
 # Column 6
-btn2 = Button(root, text="2", font="Segoe 23", relief=GROOVE, bd=0, command=btn2_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btn2 = Button(root, text="2", font="Calibri 23", relief=GROOVE, bd=0, command=btn2_clicked, fg="white", bg="#0d1c2f", activebackground="#bf3956")
 btn2.grid(row=1, column=5, sticky="nsew")
 
-btn5 = Button(root, text="5", font="Segoe 23", relief=GROOVE, bd=0, command=btn5_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btn5 = Button(root, text="5", font="Calibri 23", relief=GROOVE, bd=0, command=btn5_clicked, fg="white", bg="#0d1c2f", activebackground="#bf3956")
 btn5.grid(row=2, column=5, sticky="nsew")
 
-btn8 = Button(root, text="8", font="Segoe 23", relief=GROOVE, bd=0, command=btn8_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btn8 = Button(root, text="8", font="Calibri 23", relief=GROOVE, bd=0, command=btn8_clicked, fg="white", bg="#0d1c2f", activebackground="#bf3956")
 btn8.grid(row=3, column=5, sticky="nsew")
 
-btn0 = Button(root, text="0", font="Segoe 23", relief=GROOVE, bd=0, command=btn0_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btn0 = Button(root, text="0", font="Calibri 23", relief=GROOVE, bd=0, command=btn0_clicked, fg="white", bg="#0d1c2f", activebackground="#bf3956")
 btn0.grid(row=4, column=5, sticky="nsew")
 
-dot_btn = Button(root, text=" • ", font="Segoe 21", relief=GROOVE, bd=0, command=dot_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+dot_btn = Button(root, text=" • ", font="Calibri 21", relief=GROOVE, bd=0, command=dot_clicked, fg="white", bg="#0d1c2f", activebackground="#bf3956")
 dot_btn.grid(row=5, column=5, sticky="nsew")
-comma_btn = Button(root, text=" , ", font="Segoe 21", relief=GROOVE, bd=0, command=comma_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+comma_btn = Button(root, text=" , ", font="Calibri 21", relief=GROOVE, bd=0, command=comma_clicked, fg="white", bg="#0d1c2f", activebackground="#bf3956")
 comma_btn.grid(row=6, column=5, sticky="nsew")
 
 # Column 7
-btn3 = Button(root, text="3", font="Segoe 23", relief=GROOVE, bd=0, command=btn3_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btn3 = Button(root, text="3", font="Calibri 23", relief=GROOVE, bd=0, command=btn3_clicked, fg="white", bg="#0d1c2f", activebackground="#bf3956")
 btn3.grid(row=1, column=6, sticky="nsew")
 
-btn6 = Button(root, text="6", font="Segoe 23", relief=GROOVE, bd=0, command=btn6_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btn6 = Button(root, text="6", font="Calibri 23", relief=GROOVE, bd=0, command=btn6_clicked, fg="white", bg="#0d1c2f", activebackground="#bf3956")
 btn6.grid(row=2, column=6, sticky="nsew")
 
-btn9 = Button(root, text="9", font="Segoe 23", relief=GROOVE, bd=0, command=btn9_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btn9 = Button(root, text="9", font="Calibri 23", relief=GROOVE, bd=0, command=btn9_clicked, fg="white", bg="#0d1c2f", activebackground="#bf3956")
 btn9.grid(row=3, column=6, sticky="nsew")
 
-btneq = Button(root, text="=", font="Segoe 23", relief=GROOVE, bd=0, command=btneq_clicked, fg="white", bg="#FA8072", activebackground="#bf3956")
+btneq = Button(root, text="=", font="Calibri 23", relief=GROOVE, bd=0, command=btneq_clicked, fg="white", bg="#4696ff", activebackground="#bf3956")
 btneq.grid(row=4, column=6, sticky="nsew")
-round_btn = Button(root, text="round", font="Segoe 10 bold", relief=GROOVE, bd=0, command=round_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+round_btn = Button(root, text="round", font="Calibri 15 bold", relief=GROOVE, bd=0, command=round_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 round_btn.grid(row=5, column=6, sticky="nsew")
 
 # Remaining Buttons in Other Columns
-conv_btn = Button(root, text="Rad", font="Segoe 12 bold", relief=GROOVE, bd=0, command=conv_clicked, fg="white", bg="#FF69B4", activebackground="#bf3956")
+conv_btn = Button(root, text="rad", font="Calibri 23", relief=GROOVE, bd=0, command=conv_clicked, fg="white", bg="#4696ff", activebackground="#bf3956")
 conv_btn.grid(row=1, column=8, sticky="nsew")
 
-btnp = Button(root, text="+", font="Segoe 23", relief=GROOVE, bd=0, command=btnp_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btnp = Button(root, text="+", font="Calibri 25", relief=GROOVE, bd=0, command=btnp_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 btnp.grid(row=2, column=8, sticky="nsew")
 
-btnm = Button(root, text="-", font="Segoe 23", relief=GROOVE, bd=0, command=btnm_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btnm = Button(root, text="-", font="Calibri 23", relief=GROOVE, bd=0, command=btnm_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 btnm.grid(row=3, column=8, sticky="nsew")
 
-btnml = Button(root, text="*", font="Segoe 23", relief=GROOVE, bd=0, command=btnml_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btnml = Button(root, text="*", font="Calibri 23", relief=GROOVE, bd=0, command=btnml_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 btnml.grid(row=4, column=8, sticky="nsew")
 
-btnd = Button(root, text="/", font="Segoe 23", relief=GROOVE, bd=0, command=btnd_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+btnd = Button(root, text="/", font="Calibri 23", relief=GROOVE, bd=0, command=btnd_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 btnd.grid(row=5, column=8, sticky="nsew")
 
 
 
 
 
-mod_btn = Button(root, text="%", font="Segoe 21", relief=GROOVE, bd=0, command=mod_clicked, fg="white", bg="#333333", activebackground="#bf3956")
+mod_btn = Button(root, text="%", font="Calibri 21", relief=GROOVE, bd=0, command=mod_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 mod_btn.grid(row=5, column=8, sticky="nsew")
 
 
 #bottom row
-fav_btn1 = Button(root, text="✩", font="Segoe 23", relief=FLAT, bd=0, command=favorite1_clicked, fg="white", bg="#1e2e47", activebackground="#bf3956")
+fav_btn1 = Button(root, text="✩", font="Calibri 23", relief=FLAT, bd=0, command=favorite1_clicked, fg="white", bg="#4696ff", activebackground="#bf3956")
 fav_btn1.grid(row=8, column=3, sticky="nsew")
-history_btn = Button(root, text="History", font="Segoe 18", relief=GROOVE, bd=0, command=history_clicked, fg="white", bg="#20B2AA", activebackground="#bf3956")
+history_btn = Button(root, text="History", font="Calibri 18", relief=GROOVE, bd=0, command=history_clicked, fg="white", bg="#4696ff", activebackground="#bf3956")
 history_btn.grid(row=8, column=7, sticky="nsew")
 
 
