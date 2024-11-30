@@ -141,86 +141,66 @@ def comma_clicked():
 
 # Trigonometric and Advanced Functions
 def sin_clicked():
-    try:
-        ans = float(disp.get())
-        exp = disp.get()
+    if disp.get() == '0':  
+        disp.delete(0, END)  
+    
+    pos = len(disp.get())
+    if disp.get() and (disp.get()[-1].isdigit() or disp.get()[-1] == ')'):
+        disp.insert(pos, "*sin(")
+    else:
+        disp.insert(pos, "sin(")
 
-        if switch is True:
-            ans = math.sin(math.radians(ans))
-        else:
-            ans = math.sin(ans)
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-        history.append((exp, ans, "sin"))
-    except Exception:
-        tkinter.messagebox.showerror("Value Error", "Check your values and operators")
 def cos_clicked():
-    try:
-        ans = float(disp.get())
-        exp = disp.get()
-
-        if switch is True:
-            ans = math.cos(math.radians(ans))
-        else:
-            ans = math.cos(ans)
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-        history.append((exp, ans, "cos"))
-    except Exception:
-        tkinter.messagebox.showerror("Value Error", "Check your values and operators")
+    if disp.get() == '0':  
+        disp.delete(0, END)  
+    
+    pos = len(disp.get())
+    if disp.get() and (disp.get()[-1].isdigit() or disp.get()[-1] == ')'):
+        disp.insert(pos, "*cos(")
+    else:
+        disp.insert(pos, "cos(")
 
 def tan_clicked():
-    try:
-        ans = float(disp.get())
-        exp = disp.get()
+    if disp.get() == '0':  
+        disp.delete(0, END)  
+    
+    pos = len(disp.get())
+    if disp.get() and (disp.get()[-1].isdigit() or disp.get()[-1] == ')'):
+        disp.insert(pos, "*tan(")
+    else:
+        disp.insert(pos, "tan(")
 
-        if switch is True:
-            ans = math.tan(math.radians(ans))
-        else:
-            ans = math.tan(ans)
-        disp.delete(0, END)
-        disp.insert(0, str(ans))
-        history.append((exp, ans, "tan"))
-    except Exception:
-        tkinter.messagebox.showerror("Value Error", "Check your values and operators")
+
 def arcsin_clicked():
-    try:
-        num = float(disp.get())
-        if switch:  # If in degrees
-            result = math.degrees(math.asin(num))
-        else:
-            result = math.asin(num)
-        disp.delete(0, END)
-        disp.insert(0, str(result))
-        history.append((f"arcsin({num})", result, "arcsin"))
-    except Exception:
-        tkinter.messagebox.showerror("Value Error", "Input must be between -1 and 1.")
-def arccos_clicked():
+    if disp.get() == '0':  
+        disp.delete(0, END)  
 
-    try:
-        ans = float(disp.get())
-        if -1 <= ans <= 1:  # Ensure the input is within the domain of acos
-            if switch is True:  # Convert to degrees if in degrees mode
-                ans = math.degrees(math.acos(ans))
-            else:
-                ans = math.acos(ans)
-            disp.delete(0, END)
-            disp.insert(0, str(ans))
-        else:
-            raise ValueError("Input out of domain. Arccos accepts values between -1 and 1.")
-    except Exception as e:
-        tkinter.messagebox.showerror("Value Error", f"Check your values and operators. {e}")
+    pos = len(disp.get())
+    if disp.get() and (disp.get()[-1].isdigit() or disp.get()[-1] == ')'):
+        disp.insert(pos, "*arcsin(")
+    else:
+        disp.insert(pos, "arcsin(")
+
+def arccos_clicked():
+    if disp.get() == '0':  
+        disp.delete(0, END)  
+
+    pos = len(disp.get())
+    if disp.get() and (disp.get()[-1].isdigit() or disp.get()[-1] == ')'):
+        disp.insert(pos, "*arccos(")
+    else:
+        disp.insert(pos, "arccos(")
+
 def arctan_clicked():
-    try:
-        ans = float(disp.get())
-        if switch is True:
-            ans = math.degrees(math.atan(ans))
-        else:
-            ans = math.atan(ans)
-            disp.delete(0, END)
-            disp.insert(0, str(ans))
-    except Exception:
-        tkinter.messagebox.showerror("Value Error", "Check your values and operators")
+    if disp.get() == '0':  
+        disp.delete(0, END)  
+
+    pos = len(disp.get())
+    if disp.get() and (disp.get()[-1].isdigit() or disp.get()[-1] == ')'):
+        disp.insert(pos, "*arctan(")
+    else:
+        disp.insert(pos, "arctan(")
+
 def pow_clicked():
     pos = len(disp.get())
     disp.insert(pos, '^')
@@ -243,6 +223,7 @@ def logarithm_clicked():
         history.append((exp, ans, "log"))
     except Exception:
         tkinter.messagebox.showerror("Value Error", "Check your values and operators")
+
 def fact_clicked():
     try:
         num = int(disp.get())
@@ -254,34 +235,50 @@ def fact_clicked():
         history.append((f"{num}!", result, "factorial"))
     except Exception:
         tkinter.messagebox.showerror("Value Error", "Input must be a non-negative integer.")
+
+
+
+
 def sqr_clicked():
-    try:
-        ans = float(disp.get())
-        ans = math.sqrt(ans)
+    if disp.get() == '0':  # If the display shows 0, replace it
         disp.delete(0, END)
-        disp.insert(0, str(ans))
-    except Exception:
-        tkinter.messagebox.showerror("Value Error", "Check your values and operators")
+
+    pos = len(disp.get())
+    if disp.get() and (disp.get()[-1].isdigit() or disp.get()[-1] == ')'):
+        disp.insert(pos, "*sqrt(")
+    else:
+        disp.insert(pos, "sqrt(")
+
+
 def dot_clicked():
     pos = len(disp.get())
     disp.insert(pos, '.')
 def pi_clicked():
-    if disp.get() == '0':
+    if disp.get() == '0': 
         disp.delete(0, END)
         pos = len(disp.get())
         disp.insert(pos, str(math.pi))
 def e_clicked():
     try:
-        pos = len(disp.get())
-        disp.insert(pos, str(math.e))  # Insert the numeric constant directly
+        disp.delete(0, END) 
+        disp.insert(0, str(math.e))  
     except Exception:
         tkinter.messagebox.showerror("Value Error", "Error inserting e constant")
+
 def bl_clicked():
+    
+    if disp.get() == '0':
+        disp.delete(0, END)  
     pos = len(disp.get())
-    disp.insert(pos, '(')
+    disp.insert(pos, '(')  
+
 def br_clicked():
+    
+    if disp.get() == '0':
+        disp.delete(0, END)  
     pos = len(disp.get())
-    disp.insert(pos, ')')
+    disp.insert(pos, ')')  
+
 def del_clicked():
     pos = len(disp.get())
     display = str(disp.get())
@@ -296,24 +293,24 @@ def del_clicked():
         disp.insert(0, display[0:pos-1])
 def conv_clicked():
     global switch
-    if switch is None:
+    if switch is None or switch is False:  
         switch = True
         conv_btn['text'] = "Deg"
-
-    else:
-        switch = None
+    else:  # Switch to radians
+        switch = False
         conv_btn['text'] = "Rad"
 
 
 def ln_clicked():
-    try:
-        num = float(disp.get())
-        result = math.log(num)
+    if disp.get() == '0':  # If the display shows 0, replace it
         disp.delete(0, END)
-        disp.insert(0, str(result))
-        history.append((f"ln({num})", result, "ln"))
-    except Exception:
-        tkinter.messagebox.showerror("Value Error", "Check your input.")
+    
+    pos = len(disp.get())
+    if disp.get() and (disp.get()[-1].isdigit() or disp.get()[-1] == ')'):
+        disp.insert(pos, "*ln(")
+    else:
+        disp.insert(pos, "ln(")
+
 def mod_clicked():
     pos = len(disp.get())
     disp.insert(pos, '%')
@@ -321,32 +318,39 @@ def btneq_clicked():
     try:
         # Map supported functions to the math module
         allowed_functions = {
-            'sin': math.sin,
-            'cos': math.cos,
-            'tan': math.tan,
-            'arcsin': math.asin,
-            'arccos': math.acos,
-            'arctan': math.atan,
+            'sin': lambda x: math.sin(math.radians(x) if switch else x),
+            'cos': lambda x: math.cos(math.radians(x) if switch else x),
+            'tan': lambda x: math.tan(math.radians(x) if switch else x),
+            'arcsin': lambda x: math.degrees(math.asin(x)) if switch else math.asin(x),
+            'arccos': lambda x: math.degrees(math.acos(x)) if switch else math.acos(x),
+            'arctan': lambda x: math.degrees(math.atan(x)) if switch else math.atan(x),
             'sinh': math.sinh,
             'cosh': math.cosh,
             'tanh': math.tanh,
             'gamma': math.gamma,
-            'log': math.log10,
+            'log10': math.log10,
             'ln': math.log,
             'sqrt': math.sqrt,
             'pi': math.pi,
             'e': math.e,
-            '!':math.factorial,
-            'pi': math.pi,
-
+            'pi': math.pi
         }
 
         # Get the expression from the display
         exp = disp.get()
 
+       
+
+        exp = exp.replace(',', '')
+
+        open_parentheses = exp.count('(')
+        close_parentheses = exp.count(')')
+        if open_parentheses > close_parentheses:
+            exp += ')' * (open_parentheses - close_parentheses)
+
         # Replace caret (^) with exponentiation operator (**)
         exp = exp.replace('^', '**')
-
+   
         # Evaluate the expression with only allowed functions
         res = eval(exp, {"__builtins__": None}, allowed_functions)
 
@@ -384,14 +388,14 @@ def standard_deviation(data):
 
 
 def sinh_clicked():
-    try:
-        num = float(disp.get())
-        result = math.sinh(num)
+    if disp.get() == '0':  # If the display shows 0, replace it
         disp.delete(0, END)
-        disp.insert(0, str(result))
-        history.append((f"sinh({num})", result, "sinh"))
-    except Exception:
-        tkinter.messagebox.showerror("Value Error", "Check your input.")
+    
+    pos = len(disp.get())
+    if disp.get() and (disp.get()[-1].isdigit() or disp.get()[-1] == ')'):
+        disp.insert(pos, "*sinh(")
+    else:
+        disp.insert(pos, "sinh(")
 
 def sinh(x):
 
@@ -492,8 +496,8 @@ ln_btn.grid(row=6, column=2, sticky="nsew")
 
 sinh_btn = Button(root, text="sinh", font="Calibri 17", relief=GROOVE, bd=0, command=sinh_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
 sinh_btn.grid(row=6, column=1, sticky="nsew")
-gamma_btn = Button(root, text=" gamma ", font="Calibri 18", relief=GROOVE, bd=0, command=gamma_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
-gamma_btn.grid(row=7, column=0, sticky="nsew")
+#gamma_btn = Button(root, text=" gamma ", font="Calibri 18", relief=GROOVE, bd=0, command=gamma_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
+#gamma_btn.grid(row=7, column=0, sticky="nsew")
 
 # Column 3
 mad_btn = Button(root, text="MAD", font="Calibri 17", relief=GROOVE, bd=0, command=mad_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
@@ -580,11 +584,11 @@ btnd.grid(row=5, column=8, sticky="nsew")
 
 
 mod_btn = Button(root, text="%", font="Calibri 21", relief=GROOVE, bd=0, command=mod_clicked, fg="white", bg="#374f6d", activebackground="#bf3956")
-mod_btn.grid(row=5, column=8, sticky="nsew")
+mod_btn.grid(row=6, column=8, sticky="nsew")
 
 
 #bottom row
-fav_btn1 = Button(root, text="✩", font="Calibri 23", relief=FLAT, bd=0, command=favorite1_clicked, fg="white", bg="#4696ff", activebackground="#bf3956")
+fav_btn1 = Button(root, text="", font="Calibri 23", relief=FLAT, bd=0, command=favorite1_clicked, fg="white", bg="#1e2e47", activebackground="#bf3956")
 fav_btn1.grid(row=8, column=3, sticky="nsew")
 history_btn = Button(root, text="History", font="Calibri 18", relief=GROOVE, bd=0, command=history_clicked, fg="white", bg="#4696ff", activebackground="#bf3956")
 history_btn.grid(row=8, column=7, sticky="nsew")
