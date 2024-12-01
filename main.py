@@ -3,7 +3,7 @@ import tkinter.messagebox
 from tkmacosx import Button
 
 root = Tk()
-root.geometry("850x400+300+300")  # Adjusted width to accommodate columns
+root.geometry("850x400+300+300")  
 root.title("Scientific Calculator")
 switch = None
 history = []
@@ -199,19 +199,6 @@ def factorial(n):
     for i in range(2, n + 1):
         result *= i
     return result
-
-# Favorites Button Functions
-def favorite1_clicked():
-    tkinter.messagebox.showinfo("Favorite 1", "You clicked Favorite 1!")
-
-
-def favorite2_clicked():
-    tkinter.messagebox.showinfo("Favorite 2", "You clicked Favorite 2!")
-
-
-def favorite3_clicked():
-    tkinter.messagebox.showinfo("Favorite 3", "You clicked Favorite 3!")
-
 
 # History Button Function
 def history_clicked():
@@ -639,7 +626,7 @@ def standard_deviation(data):
 
 
 def sinh_clicked():
-    if disp.get() == '0':  # If the display shows 0, replace it
+    if disp.get() == '0':  
         disp.delete(0, END)
 
     pos = len(disp.get())
@@ -650,14 +637,10 @@ def sinh_clicked():
 
 
 def sinh(x):
-    # Calculate e^x
     exp_x = exp(x)
-    # Calculate e^(-x)
     exp_neg_x = exp(-x)
-    # Apply the formula
     result = (exp_x - exp_neg_x) / 2
     return result
-
 
 def mad_clicked():
     try:
@@ -695,8 +678,8 @@ disp = Entry(root, font="Verdana 20", fg="black", bg="mistyrose", bd=4, justify=
              foreground="black")
 disp.grid(row=0, column=0, columnspan=14, pady=10, padx=50, sticky="nsew")  # Entry spans across all columns
 
-# Configure grid for resizing
-root.grid_rowconfigure(0, weight=1)  # Entry row
+
+root.grid_rowconfigure(0, weight=1)  
 for i in range(1, 10):  # Button rows
     root.grid_rowconfigure(i, weight=1)
 for j in range(9):  # Columns
@@ -782,7 +765,7 @@ arctan_btn.grid(row=4, column=2, sticky="nsew")
 
 # Column 4 (Blank)
 
-# Shifted Columns 3, 4, 5 -> 5, 6, 7
+
 # Column 5
 btn1 = Button(root, text="1", font="Calibri 23", relief=GROOVE, bd=0, command=btn1_clicked, fg="white", bg="#0d1c2f",
               activebackground="#bf3956")
@@ -847,7 +830,7 @@ round_btn = Button(root, text="round", font="Calibri 15 bold", relief=GROOVE, bd
                    bg="#374f6d", activebackground="#bf3956")
 round_btn.grid(row=5, column=6, sticky="nsew")
 
-# Remaining Buttons in Other Columns
+
 conv_btn = Button(root, text="rad", font="Calibri 23", relief=GROOVE, bd=0, command=conv_clicked, fg="white",
                   bg="#4696ff", activebackground="#bf3956")
 conv_btn.grid(row=1, column=8, sticky="nsew")
@@ -873,8 +856,8 @@ mod_btn = Button(root, text="%", font="Calibri 21", relief=GROOVE, bd=0, command
 mod_btn.grid(row=6, column=8, sticky="nsew")
 
 # bottom row
-fav_btn1 = Button(root, text="", font="Calibri 23", relief=FLAT, bd=0, command=favorite1_clicked, fg="white",
-                  bg="#1e2e47", activebackground="#bf3956")
+fav_btn1 = Button(root, text="", font="Calibri 23", relief=FLAT, bd=0,
+                  bg="#1e2e47", activebackground="#1e2e47")
 fav_btn1.grid(row=8, column=3, sticky="nsew")
 history_btn = Button(root, text="History", font="Calibri 18", relief=GROOVE, bd=0, command=history_clicked, fg="white",
                      bg="#4696ff", activebackground="#bf3956")
